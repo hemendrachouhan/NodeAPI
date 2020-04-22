@@ -12,11 +12,15 @@
       socket.on("messages-get", function (msg) {
         $("#future").append(msg);
       });
-
-      $("button#btn").click(function (e) {
-        var message = $("#chat_input").val();
-        alert("called");
-        socket.emit("messages-sent", message);
+    </script>
+    <script>
+      $(document).ready(function () {
+        // alert("called");
+        $("#btn").click(function (e) {
+          var message = $("#chat_input").val();
+          //alert("called");
+          socket.emit("messages-sent", message);
+        });
       });
     </script>
   </head>
