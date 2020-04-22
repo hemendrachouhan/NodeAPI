@@ -1,0 +1,32 @@
+<html lang="en">
+  <head>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.js"></script>
+    <script>
+      var socket = io.connect();
+
+      socket.on("connect", function (data) {
+        socket.emit("join", "Hello World from client");
+      });
+
+      socket.on("messages-get", function (msg) {
+        $("#future").append(msg);
+      });
+
+      $("button#btn").click(function (e) {
+        var message = $("#chat_input").val();
+        alert("called");
+        socket.emit("messages-sent", message);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+
+    <form id="form" id="chat_form">
+      <input id="chat_input" type="text" />
+      <input type="button" id="btn" value="Send" />
+    </form>
+    <div id="future"></div>
+  </body>
+</html>
