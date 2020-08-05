@@ -16,9 +16,11 @@ app.get("/", function (req, res, next) {
   res.sendFile(__dirname + "/index.html");
 });
 //app.get("/", (req, res) => res.send("Hello World with Express"));
-
-io.on("connect", function (client) {
-  //console.log("A user connected");
+var clients = 0;
+io.on("connection", function (client) {
+  console.log("A user connected");
+  clients++;
+  io.emit("broadcast", { description: clients + " clients connected" });
 
   client.on("join", function (data) {
     console.log(data);
@@ -31,5 +33,5 @@ io.on("connect", function (client) {
 });
 
 http.listen(3000, () => {
-  console.log("Server up and running...");
+  console.log("Server up and running hemendra...");
 });
