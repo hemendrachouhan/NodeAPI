@@ -10,7 +10,11 @@
       });
 
       socket.on("messages-get", function (msg) {
-        $("#future").append(msg);
+        $("#future").append(msg + "\n");
+      });
+
+      socket.on("broadcast", function (data) {
+        $("#conncted-count").append(data.description);
       });
     </script>
     <script>
@@ -20,13 +24,14 @@
           var message = $("#chat_input").val();
           //alert("called");
           socket.emit("messages-sent", message);
+          $("#chat_input").val("");
         });
       });
     </script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-
+    <h1>Hello World! from client</h1>
+    <div id="conncted-count"></div>
     <form id="form" id="chat_form">
       <input id="chat_input" type="text" />
       <input type="button" id="btn" value="Send" />
